@@ -36,6 +36,6 @@ class User(db.Model):  # nuevo
 
 class UsersPing(Resource):
     def get(self):
-        return {"status": "success", "menssage": "pong!"}
+        return {"status": "success", "message": "pong!"}
 
 api.add_resource(UsersPing, "/users/ping")
