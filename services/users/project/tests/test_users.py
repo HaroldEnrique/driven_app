@@ -4,7 +4,7 @@
 import json
 import unittest
 
-from project.tests import BaseTestCase
+from project.tests.base import BaseTestCase
 
 
 class TestUserService(BaseTestCase):

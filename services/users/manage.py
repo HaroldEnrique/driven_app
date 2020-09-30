@@ -1,11 +1,15 @@
-from flask.cli import FlaskGroup
-
-from project import app
+# services/users/manage.py
 
 import sys
 import unittest
 
-cli = FlaskGroup(app)
+from flask.cli import FlaskGroup
+
+from project import create_app, db
+
+app = create_app()
+
+cli = FlaskGroup(create_app=create_app)
 
 # new
 @cli.command('recreate_db')
