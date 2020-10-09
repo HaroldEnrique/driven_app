@@ -26,7 +26,7 @@ class UsersList(Resource):
         db.session.commit()
         response_object = {
             'status': 'success',
-            'message': f'{email} was added'
+            'message': f'{email} was added!'
         }
         return response_object, 201
 
