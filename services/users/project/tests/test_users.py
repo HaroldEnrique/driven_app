@@ -33,19 +33,19 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 201)
             self.assertIn('haroldcotacallapa@upeu.edu.pe was added!', data['message'])
             self.assertIn('success', data['status'])
-    
+
     def test_add_user_invalid_json(self):
-    """Asegúrese de que se produzca un error si el objeto JSON está vacío."""
-    with self.client:
-        response = self.client.post(
-            '/users',
-            data=json.dumps({}),
-            content_type='application/json',
-        )
-        data = json.loads(response.data.decode())
-        self.assertEqual(response.status_code, 400)
-        self.assertIn('Invalid payload.', data['message'])
-        self.assertIn('fail', data['status'])
+        """Asegúrese de que se produzca un error si el objeto JSON está vacío."""
+        with self.client:
+            response = self.client.post(
+                '/users',
+                data=json.dumps({}),
+                content_type='application/json',
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 400)
+            self.assertIn('Invalid payload.', data['message'])
+            self.assertIn('fail', data['status'])
 
     def test_add_user_invalid_json_keys(self):
         """
