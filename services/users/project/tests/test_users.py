@@ -145,7 +145,7 @@ class TestUserService(BaseTestCase):
             response = self.client.get('/users')
             data = json.loads(response.data.decode())
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(len(data['data']['users']), 2)
+            self.assertEqual(len(data['data']['users']), 5)
             self.assertIn('harold.enrique', data['data']['users'][0]['username'])
             self.assertIn('haroldcotacallapa@upeu.edu.pe', data['data']['users'][0]['email'])
             self.assertIn('harolcotac', data['data']['users'][1]['username'])
