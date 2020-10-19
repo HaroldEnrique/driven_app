@@ -7,8 +7,17 @@ from sqlalchemy import exc
 from project import db
 from project.api.models import User
 
-users_blueprint = Blueprint('users', __name__)
+from flask import Blueprint, request, render_template
+
+#users_blueprint = Blueprint('users', __name__)
+users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 api = Api(users_blueprint)
+
+
+
+@users_blueprint.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 
 class UsersPing(Resource):
