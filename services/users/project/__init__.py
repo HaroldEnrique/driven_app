@@ -2,7 +2,7 @@
 
 import os
 from flask import Flask
-#from flask_restful import Resource, Api
+# from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy  # nuevo
 
 
@@ -33,15 +33,12 @@ def create_app(script_info=None):
 
     return app
 
-
-
-
 # instanciando la app
-#app = Flask(__name__)
+# app = Flask(__name__)
 
-#api = Api(app)
+# api = Api(app)
 
 # establecer configuración
-#app.config.from_object("project.config.DevelopmentConfig")  # nuevo
+# app.config.from_object("project.config.DevelopmentConfig")  # nuevo
 
 # estableciendo config
