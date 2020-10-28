@@ -12,6 +12,7 @@ db = SQLAlchemy()
 toolbar = DebugToolbarExtension()  # nuevo
 cors = CORS()
 
+
 def create_app(script_info=None):
 
     # instanciado la  app
