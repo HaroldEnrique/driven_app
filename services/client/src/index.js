@@ -29,20 +29,20 @@ class App extends Component {
 
   addUser(event) {
     event.preventDefault();
-    console.log('sanity check!');
-    console.log(this.state);
+    //console.log('sanity check!');
+    //console.log(this.state);
     const data = {
       username: this.state.username,
       email: this.state.email
     };
     axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
-    //.then((res) => {
-    //  this.getUsers();  // nuevo
-    //  this.setState({ username: 'nicole', email: 'nicole@gmail.com' });
-    //})
-    //.catch((err) => { console.log(err); });
-    .then((res) => { console.log(res); })
+    .then((res) => {
+      this.getUsers();  // nuevo
+      this.setState({ username: '', email: '' });
+    })
     .catch((err) => { console.log(err); });
+    //.then((res) => { console.log(res); })
+    //.catch((err) => { console.log(err); });
   };
 
   getUsers() {
