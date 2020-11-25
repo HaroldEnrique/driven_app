@@ -29,7 +29,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'harold.enrique',
-                    'email': 'haroldcotacallapa@upeu.edu.pe'
+                    'email': 'haroldcotacallapa@upeu.edu.pe',
+                    'password': 'greaterthaneight'
                 }),
                 content_type='application/json',
             )
@@ -63,7 +64,8 @@ class TestUserService(BaseTestCase):
             response = self.client.post(
                 '/users',
                 data=json.dumps({
-                    'email': 'haroldcotacallapa@upeu.edu.pe'
+                    'email': 'haroldcotacallapa@upeu.edu.pe',
+                    'password': 'password',
                 }),
                 content_type='application/json',
             )
@@ -81,14 +83,16 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'harold.enrique',
-                    'email': 'haroldcotacallapa@upeu.edu.pe'}),
+                    'email': 'haroldcotacallapa@upeu.edu.pe',
+                    'password': 'greaterthaneight'}),
                 content_type='application/json',
             )
             response = self.client.post(
                 '/users',
                 data=json.dumps({
                     'username': 'harold.enrique',
-                    'email': 'haroldcotacallapa@upeu.edu.pe'
+                    'email': 'haroldcotacallapa@upeu.edu.pe',
+                    'password': 'greaterthaneight'
                 }),
                 content_type='application/json',
             )
@@ -101,7 +105,8 @@ class TestUserService(BaseTestCase):
     def test_single_user(self):
         """Ensure get single user behaves correctly."""
         user = add_user('harold.enrique',
-                        'haroldcotacallapa@upeu.edu.pe')
+                        'haroldcotacallapa@upeu.edu.pe',
+                        'greaterthaneight')
         with self.client:
             response = self.client.get(f'/users/{user.id}')
             data = json.loads(response.data.decode())
@@ -137,11 +142,16 @@ class TestUserService(BaseTestCase):
         comporten correctamente."""
 
         add_user('harold.enrique',
-                 'haroldcotacallapa@upeu.edu.pe')
-        add_user('harolcotac', 'harolcotac@gmail.com')
-        add_user('enriquecotac', 'enriquecotac@gmail.com')
-        add_user('harrington', 'harrington@gmail.com')
-        add_user('alisson', 'm.alisson@gmail.com')
+                 'haroldcotacallapa@upeu.edu.pe',
+                 'greaterthaneight')
+        add_user('harolcotac', 'harolcotac@gmail.com',
+                 'greaterthaneight')
+        add_user('enriquecotac', 'enriquecotac@gmail.com',
+                 'greaterthaneight')
+        add_user('harrington', 'harrington@gmail.com',
+                 'greaterthaneight')
+        add_user('alisson', 'm.alisson@gmail.com',
+                 'greaterthaneight')
         with self.client:
             response = self.client.get('/users')
             data = json.loads(response.data.decode())
@@ -184,8 +194,8 @@ class TestUserService(BaseTestCase):
         correctamente cuando se
         hayan agregado usuarios a la base de datos."""
 
-        add_user('lucas.rafa', 'lucas.rafa@upeu.edu.pe')
-        add_user('lucas', 'lucas@gmail.com')
+        add_user('lucas.rafa', 'lucas.rafa@upeu.edu.pe', 'greaterthaneight')
+        add_user('lucas', 'lucas@gmail.com', 'greaterthaneight')
         with self.client:
             response = self.client.get('/')
             self.assertEqual(response.status_code, 200)
@@ -203,9 +213,28 @@ class TestUserService(BaseTestCase):
                 '/',
                 data=dict(
                     username='harold.new',
-                    email='harold.new@test.com'), follow_redirects=True
+                    email='harold.new@test.com',
+                    password='greaterthaneight'), follow_redirects=True
                 )
             self.assertEqual(response.status_code, 200)
+
+    def test_add_user_invalid_json_keys_no_password(self):
+        """
+        asegúrese de que se produzca un error si
+        el objeto JSON no tiene una clave y password.
+        """
+        with self.client:
+            response = self.client.post(
+                '/users',
+                data=json.dumps(dict(
+                    username='freddy',
+                    email='freddy@reallynotreal.com')),
+                content_type='application/json',
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 400)
+            self.assertIn('Invalid payload.', data['message'])
+            self.assertIn('fail', data['status'])
 
 
 if __name__ == '__main__':
