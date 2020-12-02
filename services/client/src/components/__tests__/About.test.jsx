@@ -12,6 +12,6 @@ test('About renders properly', () => {
 });
 
 test ('Acerca de muestra una instantánea correctamente', () => {
-  const tree = renderer.create (<Acerca de />). toJSON ();
-  espera (árbol) .toMatchSnapshot ();
+  const tree = renderer.create (<About/>). toJSON ();
+  expect(tree).toMatchSnapshot ();
 });
