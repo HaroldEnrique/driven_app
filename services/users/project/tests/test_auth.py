@@ -4,8 +4,8 @@
 import json
 import unittest
 
-from project import db
-from project.api.models import User
+# from project import db
+# from project.api.models import User
 from project.tests.base import BaseTestCase
 from project.tests.utils import add_user
 from flask import current_app
@@ -47,7 +47,7 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertIn(
                 'Sorry. That user already exists.', data['message'])
             self.assertIn('fail', data['status'])
-    
+
     def test_user_registration_duplicate_username(self):
         add_user('test', 'test@test.com', 'test')
         with self.client:
@@ -250,6 +250,7 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertTrue(
                 data['message'] == 'Invalid token. Please log in again.')
             self.assertEqual(response.status_code, 401)
+
 
 if __name__ == '__main__':
     unittest.main()
