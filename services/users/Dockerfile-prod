@@ -3,9 +3,11 @@ FROM python:3.8.5-alpine
 
 # instalando dependencias
 RUN apk update && \
-    apk add --virtual build-deps gcc python3-dev musl-dev && \
+    apk add --virtual build-deps gcc python3-dev musl-dev libffi-dev openssl-dev && \
     apk add postgresql-dev && \
     apk add netcat-openbsd
+
+sudo apt-get install build-essential libssl-dev libffi-dev
 
 # estableciendo directorio de trabajo
 WORKDIR /usr/src/app
