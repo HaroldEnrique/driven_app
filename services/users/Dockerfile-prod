@@ -7,7 +7,7 @@ RUN apk update && \
     apk add postgresql-dev && \
     apk add netcat-openbsd
 
-sudo apt-get install build-essential libssl-dev libffi-dev
+# sudo apt-get install build-essential libssl-dev libffi-dev
 
 # estableciendo directorio de trabajo
 WORKDIR /usr/src/app
