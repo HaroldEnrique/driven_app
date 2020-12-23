@@ -10,7 +10,7 @@ exports[`Acerca de muestra una instantánea correctamente 1`] = `
   <hr />
   <br />
   <p>
-    Add something relevant here.
+    Hello, this is Harold's web page.
   </p>
 </div>
 `;
