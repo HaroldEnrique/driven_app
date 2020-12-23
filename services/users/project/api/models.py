@@ -7,6 +7,7 @@ from project import db, bcrypt
 import datetime
 import jwt
 
+
 class User(db.Model):
 
     __tablename__ = 'users'
