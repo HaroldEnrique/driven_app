@@ -16,9 +16,9 @@ class TestAuthBlueprint(BaseTestCase):
             response = self.client.post(
                 '/auth/register',
                 data=json.dumps({
-                    'username': 'justatest',
-                    'email': 'test@test.com',
-                    'password': '123456',
+                    'username': 'testing',
+                    'email': 'testing@test.com',
+                    'password': 'testing',
                 }),
                 content_type='application/json'
             )

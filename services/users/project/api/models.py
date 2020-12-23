@@ -45,6 +45,8 @@ class User(db.Model):
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id
             }
+            print("PAYLOAD:", payload)
+            print("SECRET_KEY", current_app.config.get("SECRET_KEY"))
             return jwt.encode(
                 payload,
                 current_app.config.get('SECRET_KEY'),

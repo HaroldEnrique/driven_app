@@ -20,10 +20,13 @@ def register_user():
         'message': 'Invalid payload.'
     }
     if not post_data:
+        print("NO POST DATA")
         return jsonify(response_object), 400
     username = post_data.get('username')
     email = post_data.get('email')
     password = post_data.get('password')
+
+    print("DATA RECEIVED:",username, email, password)
     try:
         # check for existing user
         user = User.query.filter(
@@ -39,6 +42,8 @@ def register_user():
             db.session.commit()
             # generate auth token
             auth_token = new_user.encode_auth_token(new_user.id)
+            print("TOKEN", auth_token)
+            print("TIPO AUTH TOKEN", type(auth_token))
             response_object['status'] = 'success'
             response_object['message'] = 'Successfully registered.'
             response_object['auth_token'] = auth_token.decode()
