@@ -1,12 +1,11 @@
 # services/users/project/api/models.py
 
-import datetime
-import jwt
-
 from sqlalchemy.sql import func
 from flask import current_app
 from project import db, bcrypt
 
+import datetime
+import jwt
 
 class User(db.Model):
 
